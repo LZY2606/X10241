@@ -1,0 +1,228 @@
+{
+  "caseId": "source-composition-chamber",
+  "title": "源组成室：同位素端元、分馏假设与可行混合区间",
+  "domain": "stable-isotope-mixing/ecological-geochemistry",
+  "confidenceLevel": "0.95",
+  "axes": [
+    { "key": "d13C", "label": "δ13C", "unit": "permil_VPDB", "datum": "VPDB" },
+    { "key": "d15N", "label": "δ15N", "unit": "permil_AIR", "datum": "AIR" }
+  ],
+  "endmembers": [
+    {
+      "uid": "em-marine",
+      "label": "海洋源 (marine)",
+      "means": { "d13C": -18.0, "d15N": 12.0 },
+      "sigma": { "d13C": 0.6, "d15N": 0.5 },
+      "correlations": { "d13C": { "d15N": 0.15 } }
+    },
+    {
+      "uid": "em-terrestrial",
+      "label": "陆地C3源 (terrestrial)",
+      "means": { "d13C": -28.0, "d15N": 3.0 },
+      "sigma": { "d13C": 0.8, "d15N": 0.7 },
+      "correlations": { "d13C": { "d15N": -0.1 } }
+    },
+    {
+      "uid": "em-agriculture",
+      "label": "农业源 (agriculture)",
+      "means": { "d13C": -22.0, "d15N": 9.0 },
+      "sigma": { "d13C": 0.7, "d15N": 0.6 }
+    },
+    {
+      "uid": "em-collinear-a",
+      "label": "共线端元A",
+      "means": { "d13C": -30.0, "d15N": 2.0 },
+      "sigma": { "d13C": 0.4, "d15N": 0.4 }
+    },
+    {
+      "uid": "em-collinear-b",
+      "label": "共线端元B",
+      "means": { "d13C": -25.0, "d15N": 7.0 },
+      "sigma": { "d13C": 0.4, "d15N": 0.4 }
+    },
+    {
+      "uid": "em-collinear-c",
+      "label": "共线端元C",
+      "means": { "d13C": -20.0, "d15N": 12.0 },
+      "sigma": { "d13C": 0.4, "d15N": 0.4 }
+    }
+  ],
+  "endmemberSets": [
+    {
+      "uid": "ems-baseline",
+      "label": "基线三端元 {marine, terrestrial, agriculture}",
+      "members": ["em-marine", "em-terrestrial", "em-agriculture"]
+    },
+    {
+      "uid": "ems-collinear",
+      "label": "近共线三端元 {A,B,C}（同一混合直线）",
+      "members": ["em-collinear-a", "em-collinear-b", "em-collinear-c"]
+    }
+  ],
+  "covariances": [
+    {
+      "uid": "cov-diag",
+      "label": "独立测量误差（对角）",
+      "axes": ["d13C", "d15N"],
+      "matrix": [[0.25, 0.0], [0.0, 0.25]]
+    },
+    {
+      "uid": "cov-correlated",
+      "label": "相关测量误差（仪器共因，ρ=0.85）",
+      "axes": ["d13C", "d15N"],
+      "matrix": [[0.36, 0.306], [0.306, 0.36]]
+    }
+  ],
+  "fractionations": [
+    {
+      "uid": "frac-v1",
+      "label": "分馏假设 v1：无额外分馏",
+      "offsets": {}
+    },
+    {
+      "uid": "frac-v2",
+      "label": "分馏假设 v2：陆地源矿化富集 (+1.2‰ δ13C, +1.5‰ δ15N)",
+      "offsets": {
+        "em-terrestrial": { "d13C": 1.2, "d15N": 1.5 },
+        "em-collinear-b": { "d13C": 1.2, "d15N": 1.5 }
+      }
+    }
+  ],
+  "priors": [
+    {
+      "uid": "prior-none",
+      "label": "无非负/和一之外的先验",
+      "note": "仅 sum(w)=1 与 w>=0"
+    },
+    {
+      "uid": "prior-structural",
+      "label": "结构歧义先验：农业源在 {marine, agriculture} 中择一，产生多个可行区",
+      "structuralGroups": [[0, 2]],
+      "note": "组合1仅 marine+terrestrial；组合2仅 agriculture+terrestrial；两个区各自保留"
+    },
+    {
+      "uid": "prior-impossible",
+      "label": "不可行先验：每个端元权重都必须大于 0.6",
+      "weightBoxes": { "1": [0.6, 1.0], "2": [0.6, 1.0], "3": [0.6, 1.0] },
+      "note": "三个下界之和 1.8 > 1，与单纯形不相交"
+    }
+  ],
+  "samples": [
+    {
+      "uid": "sm-mixed",
+      "label": "混合样 M1（端元包络内部）",
+      "values": { "d13C": -23.0, "d15N": 7.5 },
+      "covariance": "cov-diag"
+    },
+    {
+      "uid": "sm-far",
+      "label": "远场样 X1（明显超出端元包络）",
+      "values": { "d13C": -5.0, "d15N": 25.0 },
+      "covariance": "cov-diag"
+    },
+    {
+      "uid": "sm-corr",
+      "label": "相关误差样 C1",
+      "values": { "d13C": -22.4, "d15N": 8.6 },
+      "covariance": "cov-correlated"
+    },
+    {
+      "uid": "sm-missing-n",
+      "label": "缺维样 D1（δ15N 未检出，保留 null）",
+      "values": { "d13C": -24.0 },
+      "covariance": "cov-diag"
+    },
+    {
+      "uid": "sm-collinear",
+      "label": "共线样 L1（落在 A-B-C 直线上）",
+      "values": { "d13C": -22.5, "d15N": 9.5 },
+      "covariance": "cov-diag"
+    },
+    {
+      "uid": "sm-switch",
+      "label": "分馏切换样 F1",
+      "values": { "d13C": -24.0, "d15N": 5.2 },
+      "covariance": "cov-diag"
+    },
+    {
+      "uid": "sm-regions",
+      "label": "多可行区样 R1",
+      "values": { "d13C": -25.0, "d15N": 3.6 },
+      "covariance": "cov-diag"
+    },
+    {
+      "uid": "sm-priorbad",
+      "label": "不可行先验样 P1",
+      "values": { "d13C": -23.0, "d15N": 7.0 },
+      "covariance": "cov-diag"
+    }
+  ],
+  "scenarios": [
+    {
+      "uid": "sc-baseline",
+      "label": "基线：M1 × 三端元 × v1 × 无额外先验",
+      "sample": "sm-mixed", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-none", "covariance": "cov-diag",
+      "tags": ["baseline"]
+    },
+    {
+      "uid": "sc-collinear",
+      "label": "近共线端元：L1 × {A,B,C}",
+      "sample": "sm-collinear", "endmemberSet": "ems-collinear",
+      "fractionation": "frac-v1", "prior": "prior-none", "covariance": "cov-diag",
+      "tags": ["near-collinear"]
+    },
+    {
+      "uid": "sc-outside",
+      "label": "样品超出包络：X1",
+      "sample": "sm-far", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-none", "covariance": "cov-diag",
+      "tags": ["outside-envelope"]
+    },
+    {
+      "uid": "sc-correlated",
+      "label": "相关误差：C1（ρ=0.85 协方差传播）",
+      "sample": "sm-corr", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-none", "covariance": "cov-correlated",
+      "tags": ["correlated-error"]
+    },
+    {
+      "uid": "sc-missing",
+      "label": "缺失同位素维：D1 仅 δ13C",
+      "sample": "sm-missing-n", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-none", "covariance": "cov-diag",
+      "tags": ["missing-dimension"]
+    },
+    {
+      "uid": "sc-frac-switch",
+      "label": "分馏版本切换：F1 × v1，重放时切到 v2",
+      "sample": "sm-switch", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-none", "covariance": "cov-diag",
+      "tags": ["fractionation-switch"]
+    },
+    {
+      "uid": "sc-multi-region",
+      "label": "多个可行区：R1 × 结构歧义先验",
+      "sample": "sm-regions", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-structural", "covariance": "cov-diag",
+      "tags": ["multiple-regions"]
+    },
+    {
+      "uid": "sc-prior-infeasible",
+      "label": "不可行先验：P1 × 下界和>1",
+      "sample": "sm-priorbad", "endmemberSet": "ems-baseline",
+      "fractionation": "frac-v1", "prior": "prior-impossible", "covariance": "cov-diag",
+      "tags": ["infeasible-prior"]
+    }
+  ],
+  "replay": [
+    { "kind": "import", "label": "初始导入：原始记录全部保留" },
+    { "kind": "review", "label": "审阅者核对样品/端元/协方差/分馏/单位/先验原始记录" },
+    { "kind": "evaluate", "label": "基线与 7 个边界情形计算", "scenario": "sc-baseline" },
+    { "kind": "branch", "label": "近共线专查分支保留全部合法候选", "branch": "br-focus-collinear", "parentBranch": "br-main" },
+    { "kind": "parameter-revise", "label": "分馏 v1→v2（局部失效）", "scenario": "sc-frac-switch", "fractionation": "frac-v2" },
+    { "kind": "source-revise", "label": "相关误差样 σ 调整（仅依赖该样品的结论失效）", "scenario": "sc-correlated", "target": "sm-corr" },
+    { "kind": "decision", "label": "窗口A 接受多可行区第一区", "scenario": "sc-multi-region", "verdict": "accept" },
+    { "kind": "decision-conflict", "label": "窗口B 用旧序号提交否定 → 冲突与双方差异", "scenario": "sc-multi-region", "verdict": "reject", "conflict": true }
+  ]
+}

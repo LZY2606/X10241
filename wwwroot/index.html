@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>源组成室 · 稳定同位素混合复核台</title>
+<link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+<header>
+  <h1>源组成室：同位素端元 · 分馏假设 · 可行混合区间</h1>
+  <div class="toolbar">
+    <button id="loadBtn">载入仓库内示例</button>
+    <button id="replayBtn">重放边界情形</button>
+    <button id="exportBtn">导出档案</button>
+    <label class="import-label">导入档案（替换本地库）
+      <input type="file" id="importFile" accept=".sqlite,application/octet-stream" />
+    </label>
+    <span id="statusPill" class="pill">未载入</span>
+    <span class="pill" id="schemaPill"></span>
+  </div>
+</header>
+
+<main>
+  <aside id="leftPanel">
+    <section>
+      <h2>分支（可回溯）</h2>
+      <div id="branchList" class="list"></div>
+      <div class="row">
+        <select id="compareBranch"></select>
+        <button id="compareBtn" title="并排分馏假设与端元版本">并排对比</button>
+      </div>
+    </section>
+    <section>
+      <h2>场景 / 候选</h2>
+      <div id="scenarioList" class="list"></div>
+      <div id="candidateList" class="list subtle"></div>
+    </section>
+    <section>
+      <h2>时间事件（时间机器）</h2>
+      <div id="eventList" class="list events"></div>
+    </section>
+  </aside>
+
+  <section id="centerPanel">
+    <div class="compare-grid" id="compareGrid">
+      <div class="pane" id="paneA">
+        <h2>视图 A <small id="paneATitle"></small></h2>
+        <div id="svgA" class="svg-host"></div>
+      </div>
+      <div class="pane hidden" id="paneB">
+        <h2>视图 B（并排：其它分馏/端元版本） <small id="paneBTitle"></small></h2>
+        <div id="svgB" class="svg-host"></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h2>可行比例区域（权重单纯形）与残差</h2>
+      <div id="regionSvg" class="svg-host"></div>
+      <div id="residualSvg" class="svg-host"></div>
+    </div>
+  </section>
+
+  <aside id="rightPanel">
+    <section>
+      <h2>复核操作（不改原数据）</h2>
+      <div class="row"><span class="id-label">期望提交序号</span><input id="expectedSeq" type="number" value="" /></div>
+      <textarea id="rationale" rows="2" placeholder="裁定理由（可选）"></textarea>
+      <div class="row">
+        <button id="acceptBtn" class="accept">接受</button>
+        <button id="rejectBtn" class="reject">否定</button>
+      </div>
+      <div class="row">
+        <button id="reviseFracBtn" class="adjust">分馏切到 v2</button>
+        <button id="reviseSourceBtn" class="adjust">局部源数据修订</button>
+      </div>
+      <div id="decisionList" class="list"></div>
+    </section>
+    <section>
+      <h2>机器可读判定依据</h2>
+      <div id="assessmentList" class="list assessments"></div>
+    </section>
+    <section>
+      <h2>来源链 / 失效范围</h2>
+      <div id="provenance" class="list provenance"></div>
+    </section>
+  </aside>
+</main>
+
+<div id="conflictModal" class="modal hidden">
+  <div class="modal-card">
+    <h2>版本冲突：另一个窗口已先提交</h2>
+    <p>你的期望序号已过期。下方为双方差异，关闭后可基于最新状态重新提交。</p>
+    <pre id="conflictDiff"></pre>
+    <button id="conflictClose">知道了，刷新差异</button>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
