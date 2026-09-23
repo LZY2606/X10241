@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IsotopeMix.Core\IsotopeMix.Core.csproj" />
+    <ProjectReference Include="..\IsotopeMix.Store\IsotopeMix.Store.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\cases\**" LinkBase="cases" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/IsotopeMix.Core/IsotopeMix.Core.csproj" />
+  <Project Path="src/IsotopeMix.Store/IsotopeMix.Store.csproj" />
+  <Project Path="src/IsotopeMix.Web/IsotopeMix.Web.csproj" />
+  <Project Path="tests/IsotopeMix.Tests/IsotopeMix.Tests.csproj" />
+</Solution>
