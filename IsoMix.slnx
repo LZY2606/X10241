@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/IsoMix.Web/IsoMix.Web.csproj" />
+  <Project Path="tests/IsoMix.Tests/IsoMix.Tests.csproj" />
+</Solution>
