@@ -1,0 +1,270 @@
+{
+  "schema": "isomix.casepack/1",
+  "packId": "pack.source-composition-lab.v1",
+  "title": "源组成室：同位素端元、分馏假设与可行混合区间",
+  "narrative": "生态地球化学小组导入样品稳定同位素值、多个端元分布与分馏因子，目标是查看混合比例的可行域而非单点答案。初始导入后审阅者核对样品、端元、测量协方差、分馏版本、单位与先验的原始记录；随后逐个触发边界组合并保留输入片段、判定状态与受影响对象。",
+  "ruleVersion": "mixing-rules/v1.0",
+  "confidence": "0.95",
+  "axes": [
+    { "key": "d13C", "label": "δ13C", "unit": "per_mil_VPDB", "datum": "VPDB" },
+    { "key": "d15N", "label": "δ15N", "unit": "per_mil_AIR", "datum": "AIR" }
+  ],
+  "samples": [
+    {
+      "id": "sample.estuary.s1",
+      "name": "河口悬浮颗粒 S1",
+      "values": {
+        "d13C": { "raw": "-21.4", "unit": "per_mil_VPDB" },
+        "d15N": { "raw": "7.8", "unit": "per_mil_AIR" }
+      },
+      "covariance": "cov.estuary.s1",
+      "note": "2026-05 航次表层 SPM，原始仪器读数已保留。"
+    },
+    {
+      "id": "sample.estuary.s2",
+      "name": "河口沉积物 S2（缺一维）",
+      "values": {
+        "d13C": { "raw": "-24.1", "unit": "per_mil_VPDB" }
+      },
+      "missingAxes": ["d15N"],
+      "covariance": "cov.estuary.s1",
+      "note": "δ15N 因样品量不足未测得；缺失维显式保留，不补零。"
+    }
+  ],
+  "endmemberSets": [
+    {
+      "id": "emset.standard.v1",
+      "label": "标准三端元 v1（陆生C3 / 海洋浮游 / 底栖微藻）",
+      "members": [
+        {
+          "id": "em.c3",
+          "name": "陆生 C3 植物",
+          "composition": {
+            "d13C": { "raw": "-28.5", "unit": "per_mil_VPDB" },
+            "d15N": { "raw": "2.1", "unit": "per_mil_AIR" }
+          },
+          "stdDev": { "d13C": 0.6, "d15N": 0.7 }
+        },
+        {
+          "id": "em.marine",
+          "name": "海洋浮游植物",
+          "composition": {
+            "d13C": { "raw": "-19.2", "unit": "per_mil_VPDB" },
+            "d15N": { "raw": "11.4", "unit": "per_mil_AIR" }
+          },
+          "stdDev": { "d13C": 0.5, "d15N": 0.8 }
+        },
+        {
+          "id": "em.benthic",
+          "name": "底栖微藻",
+          "composition": {
+            "d13C": { "raw": "-13.6", "unit": "per_mil_VPDB" },
+            "d15N": { "raw": "4.6", "unit": "per_mil_AIR" }
+          },
+          "stdDev": { "d13C": 0.7, "d15N": 0.6 }
+        }
+      ]
+    },
+    {
+      "id": "emset.collinear.v1",
+      "label": "近共线三端元 v1（δ15N 几乎相同）",
+      "members": [
+        {
+          "id": "em.c3",
+          "name": "陆生 C3 植物",
+          "composition": {
+            "d13C": { "raw": "-28.5", "unit": "per_mil_VPDB" },
+            "d15N": { "raw": "5.000", "unit": "per_mil_AIR" }
+          }
+        },
+        {
+          "id": "em.marine",
+          "name": "海洋浮游植物",
+          "composition": {
+            "d13C": { "raw": "-20.0", "unit": "per_mil_VPDB" },
+            "d15N": { "raw": "5.012", "unit": "per_mil_AIR" }
+          }
+        },
+        {
+          "id": "em.benthic",
+          "name": "底栖微藻",
+          "composition": {
+            "d13C": { "raw": "-12.5", "unit": "per_mil_VPDB" },
+            "d15N": { "raw": "5.024", "unit": "per_mil_AIR" }
+          }
+        }
+      ]
+    }
+  ],
+  "covariances": [
+    {
+      "id": "cov.estuary.s1",
+      "label": "S1 测量协方差（对角）",
+      "axisOrder": ["d13C", "d15N"],
+      "matrix": [
+        ["0.36", "0.00"],
+        ["0.00", "0.49"]
+      ],
+      "unit": "per_mil_squared"
+    },
+    {
+      "id": "cov.correlated.v1",
+      "label": "相关误差协方差（正相关）",
+      "axisOrder": ["d13C", "d15N"],
+      "matrix": [
+        ["0.64", "0.42"],
+        ["0.42", "0.81"]
+      ],
+      "unit": "per_mil_squared"
+    }
+  ],
+  "fractionations": [
+    {
+      "id": "frac.none.v1",
+      "label": "分馏 v1：忽略分馏（Δ=0）",
+      "factors": [
+        { "axis": "d13C", "delta": "0.0", "unit": "per_mil" },
+        { "axis": "d15N", "delta": "0.0", "unit": "per_mil" }
+      ],
+      "note": "最简基线假设。"
+    },
+    {
+      "id": "frac.trophic.v2",
+      "label": "分馏 v2：营养级富集（碳 +1.0，氮 +3.2）",
+      "factors": [
+        { "axis": "d13C", "delta": "1.0", "unit": "per_mil" },
+        { "axis": "d15N", "delta": "3.2", "unit": "per_mil" }
+      ],
+      "note": "消费者相对食物的营养级分馏，端元有效坐标整体平移。"
+    }
+  ],
+  "priors": [
+    {
+      "id": "prior.uniform.v1",
+      "label": "均匀先验 [0,1]",
+      "lo": { "em.c3": "0.0", "em.marine": "0.0", "em.benthic": "0.0" },
+      "hi": { "em.c3": "1.0", "em.marine": "1.0", "em.benthic": "1.0" }
+    },
+    {
+      "id": "prior.infeasible.v1",
+      "label": "不可行先验（陆生与海洋均 ≥0.7）",
+      "lo": { "em.c3": "0.7", "em.marine": "0.7", "em.benthic": "0.0" },
+      "hi": { "em.c3": "1.0", "em.marine": "1.0", "em.benthic": "1.0" },
+      "note": "与和为一矛盾，用来检验系统不伪造比例。"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp.s1.std.none",
+      "label": "S1 × 标准端元 × 无分馏",
+      "sample": "sample.estuary.s1",
+      "endmemberSet": "emset.standard.v1",
+      "fractionation": "frac.none.v1",
+      "prior": "prior.uniform.v1"
+    },
+    {
+      "id": "hyp.s1.std.trophic",
+      "label": "S1 × 标准端元 × 营养级分馏 v2",
+      "sample": "sample.estuary.s1",
+      "endmemberSet": "emset.standard.v1",
+      "fractionation": "frac.trophic.v2",
+      "prior": "prior.uniform.v1"
+    },
+    {
+      "id": "hyp.s1.collinear.none",
+      "label": "S1 × 近共线端元 × 无分馏",
+      "sample": "sample.estuary.s1",
+      "endmemberSet": "emset.collinear.v1",
+      "fractionation": "frac.none.v1",
+      "prior": "prior.uniform.v1"
+    },
+    {
+      "id": "hyp.s2.std.none",
+      "label": "S2（缺 δ15N）× 标准端元 × 无分馏",
+      "sample": "sample.estuary.s2",
+      "endmemberSet": "emset.standard.v1",
+      "fractionation": "frac.none.v1",
+      "prior": "prior.uniform.v1",
+      "missingAxes": ["d15N"]
+    },
+    {
+      "id": "hyp.s1.std.none.infeasible",
+      "label": "S1 × 标准端元 × 不可行先验",
+      "sample": "sample.estuary.s1",
+      "endmemberSet": "emset.standard.v1",
+      "fractionation": "frac.none.v1",
+      "prior": "prior.infeasible.v1"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario.near-collinear",
+      "title": "近共线端元：明确报可识别性不足，保留全部合法候选",
+      "changeKind": "endmember-set-switch",
+      "hypothesis": "hyp.s1.collinear.none",
+      "expectIdentifiable": false,
+      "expectDiagnosticCodes": ["IDENTIFIABILITY.NEAR_COLLINEAR", "CONSTRAINT.SUM_ONE_NONNEGATIVE_EXACT"],
+      "expectAffectedContains": ["em.c3", "em.marine", "em.benthic"]
+    },
+    {
+      "id": "scenario.outside-envelope",
+      "title": "样品超出端元包络",
+      "changeKind": "amend-sample",
+      "hypothesis": "hyp.s1.std.none",
+      "amendRecord": "sample.estuary.s1",
+      "amendJson": "{\"values\":{\"d13C\":{\"raw\":\"4.0\",\"unit\":\"per_mil_VPDB\"},\"d15N\":{\"raw\":\"35.0\",\"unit\":\"per_mil_AIR\"}}}",
+      "expectFeasible": false,
+      "expectDiagnosticCodes": ["GEOMETRY.SAMPLE_OUTSIDE_ENVELOPE"]
+    },
+    {
+      "id": "scenario.correlated-errors",
+      "title": "相关误差：按完整协方差传播",
+      "changeKind": "amend-covariance",
+      "hypothesis": "hyp.s1.std.none",
+      "amendRecord": "cov.estuary.s1",
+      "amendJson": "{\"covariance\":\"cov.correlated.v1\"}",
+      "expectDiagnosticCodes": ["COVARIANCE.CORRELATED_ERRORS_PROPAGATED"]
+    },
+    {
+      "id": "scenario.missing-axis",
+      "title": "缺失同位素维：降维且不补零",
+      "changeKind": "hypothesis",
+      "hypothesis": "hyp.s2.std.none",
+      "expectDiagnosticCodes": ["DIMENSIONS.MISSING_AXES_REDUCED"]
+    },
+    {
+      "id": "scenario.fractionation-switch",
+      "title": "分馏版本切换：v1 → v2 仅影响依赖该分馏的结论",
+      "changeKind": "fractionation-switch",
+      "hypothesis": "hyp.s1.std.trophic",
+      "expectDiagnosticCodes": ["CONSTRAINT.SUM_ONE_NONNEGATIVE_EXACT"]
+    },
+    {
+      "id": "scenario.multiple-regions",
+      "title": "多个可行区：全部候选保留",
+      "changeKind": "amend-sample",
+      "hypothesis": "hyp.s1.std.none",
+      "amendRecord": "sample.estuary.s1",
+      "amendJson": "{\"values\":{\"d13C\":{\"raw\":\"-21.4\",\"unit\":\"per_mil_VPDB\"},\"d15N\":{\"raw\":\"7.8\",\"unit\":\"per_mil_AIR\"}},\"multiRegion\":true}",
+      "expectComponentCount": 2,
+      "expectDiagnosticCodes": ["FEASIBILITY.MULTIPLE_REGIONS"]
+    },
+    {
+      "id": "scenario.infeasible-prior",
+      "title": "不可行先验：不伪造比例",
+      "changeKind": "hypothesis",
+      "hypothesis": "hyp.s1.std.none.infeasible",
+      "expectFeasible": false,
+      "expectDiagnosticCodes": ["PRIOR.INFEASIBLE"]
+    }
+  ],
+  "replay": {
+    "steps": [
+      { "id": "step.import-baseline", "kind": "import", "description": "导入基线：样品、端元、协方差、分馏、单位、先验原始记录。" },
+      { "id": "step.param-revision", "kind": "amend-fractionation", "description": "参数修订：营养级氮分馏 3.2 → 3.5，仅局部依赖失效。", "record": "frac.trophic.v2", "payloadJson": "{\"factors\":[{\"axis\":\"d13C\",\"delta\":\"1.0\",\"unit\":\"per_mil\"},{\"axis\":\"d15N\",\"delta\":\"3.5\",\"unit\":\"per_mil\"}]}" },
+      { "id": "step.source-local-change", "kind": "amend-sample", "description": "只影响局部依赖的源数据改动：S1 的 δ13C 仪器读数订正。", "record": "sample.estuary.s1", "payloadJson": "{\"values\":{\"d13C\":{\"raw\":\"-21.7\",\"unit\":\"per_mil_VPDB\"},\"d15N\":{\"raw\":\"7.8\",\"unit\":\"per_mil_AIR\"}}}" },
+      { "id": "step.decision-a", "kind": "decision", "description": "人工决定 A：在标准端元/无分馏下接受海洋占优候选。", "hypothesis": "hyp.s1.std.none", "decision": "accept" },
+      { "id": "step.decision-b-conflict", "kind": "decision", "description": "冲突人工决定 B：基于同一父事件接受陆生 C3 占优候选，制造版本冲突。", "hypothesis": "hyp.s1.std.none", "decision": "accept-alt" }
+    ]
+  }
+}

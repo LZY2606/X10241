@@ -34,3 +34,10 @@ coverage/
 .vite/
 .turbo/
 *.tsbuildinfo
+
+# --- .NET ---
+bin/
+obj/
+isomix.db
+isomix.db-*
+*.user
