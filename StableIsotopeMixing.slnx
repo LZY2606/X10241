@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/IsotopeMixing.Core/IsotopeMixing.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/IsotopeMixing.Tests/IsotopeMixing.Tests.csproj" />
+  </Folder>
+</Solution>
