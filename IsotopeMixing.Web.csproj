@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>IsotopeMixing.Web</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="src/IsotopeMixing.Core/IsotopeMixing.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="web\casepack\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
