@@ -34,3 +34,10 @@ coverage/
 .vite/
 .turbo/
 *.tsbuildinfo
+
+# --- .NET build artifacts & local database ---
+bin/
+obj/
+*.user
+isomix.db
+isomix.db-*
