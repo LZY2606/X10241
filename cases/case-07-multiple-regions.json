@@ -1,0 +1,55 @@
+{
+  "caseId": "case-07-multiple-regions",
+  "title": "多个可行区：C 端元为两子群体的高斯混合，形成两个内部岛",
+  "narrativeStage": "boundary-combination",
+  "tracers": [
+    { "code": "d13C", "unit": { "code": "permil VPDB", "rawToken": "‰ VPDB" }, "reference": "VPDB" },
+    { "code": "d15N", "unit": { "code": "permil AIR", "rawToken": "‰ AIR" }, "reference": "AIR" }
+  ],
+  "sample": {
+    "sampleId": "smp-multi-01",
+    "name": "双峰物源区混合样",
+    "raw": { "d13C": "5.0 ‰ VPDB", "d15N": "3.0 ‰ AIR" },
+    "values": [5.0, 3.0],
+    "measurementCovariance": {
+      "tracers": ["d13C", "d15N"],
+      "matrix": [[0.04, 0.0], [0.0, 0.04]],
+      "rawToken": "high-precision IRMS, 0.2 ‰ sd"
+    }
+  },
+  "sources": [
+    { "sourceId": "src-A", "name": "端元 A（河流上游）", "meansRaw": "0.0;0.0",
+      "covarianceRaw": "0.4 ‰^2 isotropic",
+      "modes": [{ "mean": [0.0, 0.0], "covariance": [[0.16, 0.0], [0.0, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-B", "name": "端元 B（河口）", "meansRaw": "10.0;0.0",
+      "covarianceRaw": "0.4 ‰^2 isotropic",
+      "modes": [{ "mean": [10.0, 0.0], "covariance": [[0.16, 0.0], [0.0, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-C", "name": "端元 C（含两个子群体的浮游生物组合）",
+      "meansRaw": "mode1=5.0;6.0  mode2=5.0;15.0",
+      "covarianceRaw": "both modes 0.4 ‰^2 isotropic",
+      "modes": [
+        { "mean": [5.0, 6.0], "covariance": [[0.16, 0.0], [0.0, 0.16]], "weight": 0.5 },
+        { "mean": [5.0, 15.0], "covariance": [[0.16, 0.0], [0.0, 0.16]], "weight": 0.5 }
+      ] }
+  ],
+  "fractionation": {
+    "fractionationId": "frac-v1", "label": "无分馏", "basis": "identity",
+    "rawToken": "{}", "shifts": { "d13C": 0.0, "d15N": 0.0 }
+  },
+  "prior": null,
+  "confidenceLevel": 0.95,
+  "expect": {
+    "feasible": true,
+    "regionCount": 2,
+    "candidateCount": 2,
+    "regionsApprox": [
+      { "center": [0.25, 0.25, 0.50], "tolerance": 0.08 },
+      { "center": [0.40, 0.40, 0.20], "tolerance": 0.08 }
+    ],
+    "diagnosticContains": ["multiple_feasible_regions"],
+    "ruleChecks": ["all_disconnected_regions_retained_as_candidates"]
+  },
+  "provenance": {
+    "mustEmitEvents": ["multiple_regions_detected", "analysis_completed"]
+  }
+}

@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="isotope.csproj" />
+  <Project Path="tests/IsotopeApp.Tests/IsotopeApp.Tests.csproj" />
+  <Project Path="tests/IsotopeApp.IntegrationTests/IsotopeApp.IntegrationTests.csproj" />
+</Solution>

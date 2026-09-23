@@ -1,0 +1,48 @@
+{
+  "caseId": "case-05-missing-dimension",
+  "title": "缺失同位素维：原值留在原位附诊断，按单维判定",
+  "narrativeStage": "boundary-combination",
+  "tracers": [
+    { "code": "d13C", "unit": { "code": "permil VPDB", "rawToken": "‰ VPDB" }, "reference": "VPDB" },
+    { "code": "d15N", "unit": { "code": "permil AIR", "rawToken": "‰ AIR" }, "reference": "AIR" }
+  ],
+  "sample": {
+    "sampleId": "smp-miss-01",
+    "name": "氮同位素缺失样（仪器未出峰）",
+    "raw": { "d13C": "-19.0 ‰ VPDB", "d15N": "n.d.（未检出，不删除该列）" },
+    "values": [-19.0, null],
+    "measurementCovariance": {
+      "tracers": ["d13C", "d15N"],
+      "matrix": [[0.36, 0.05], [0.05, 0.25]],
+      "rawToken": "[[0.36,0.05],[0.05,0.25]]; d15N row retained though value missing"
+    }
+  },
+  "sources": [
+    { "sourceId": "src-c3", "name": "C3 陆生植物", "meansRaw": "-26.0;4.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-26.0, 4.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-c4", "name": "C4 草本", "meansRaw": "-12.0;12.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-12.0, 12.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-marine", "name": "海洋浮游生物", "meansRaw": "-20.0;-8.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-20.0, -8.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] }
+  ],
+  "fractionation": {
+    "fractionationId": "frac-v1", "label": "无分馏", "basis": "identity",
+    "rawToken": "{}", "shifts": { "d13C": 0.0, "d15N": 0.0 }
+  },
+  "prior": null,
+  "confidenceLevel": 0.95,
+  "expect": {
+    "feasible": true,
+    "regionCountAtLeast": 1,
+    "diagnosticContains": ["missing_isotope_dimensions"],
+    "ruleChecks": ["missing_value_kept_in_place", "dimension_count_reported"],
+    "effectiveDimensions": 1
+  },
+  "provenance": {
+    "mustEmitEvents": ["missing_dimension_recorded", "analysis_completed"],
+    "mustRetainRaw": ["sample.raw.d15N"]
+  }
+}

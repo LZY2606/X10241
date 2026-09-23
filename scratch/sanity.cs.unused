@@ -1,0 +1,29 @@
+using IsotopeApp.Analysis;
+
+static SolverSource S(string id,string name,double[][] means,double[][,] covs,double[]? w=null)=>new(){
+  SourceId=id,Name=name,ModeMeans=means,ModeCovariances=covs,ModeWeights=w??means.Select(_=>1.0/means.Length).ToArray()};
+static double[,] M2(double a,double b,double c=0)=>new[,]{{a,c},{c,b}};
+
+void Run(string name, SolverInput inp){
+  var r=new MixingSolver().Solve(inp);
+  Console.WriteLine($"{name}: feas={r.Feasible} hull={r.InsideMeanHull} ident={r.IdentifiabilityAdequate} cond={r.ConditionNumber:0.#} regions={r.Regions.Count} thr={r.StatisticThreshold:0.###} bestT={r.UnconstrainedBestStatistic:0.##} grid={r.GridSize}");
+  foreach(var rg in r.Regions)
+    Console.WriteLine($"   reg{rg.ComponentIndex} n={rg.GridCellCount} center=[{string.Join(",",rg.Center.Select(x=>x.ToString("0.00")))}] bestT={rg.BestStatistic:0.##}");
+  foreach(var d in r.Diagnostics) Console.WriteLine("   diag: "+d);
+}
+string[] tracers={"d13C","d15N"};
+var means1=new[]{new[]{-26.0,4.0},new[]{-12.0,12.0},new[]{-20.0,-8.0}};
+SolverSource[] srcs1=means1.Select((m,i)=>S($"s{i}",$"S{i}",new[]{m},new[]{M2(0.25,0.16,0.02)})).ToArray();
+var se=new[,]{{0.36,0.05},{0.05,0.25}};
+Run("baseline",new(){TrialId="t",Tracers=tracers,Observation=new[]{-19.0,3.0},MeasurementCovariance=se,Sources=srcs1,FractionationShift=new[]{0.0,0.0}});
+var means2=new[]{new[]{-26.0,4.0},new[]{-20.0,0.0},new[]{-14.0,-4.0}};
+SolverSource[] srcs2=means2.Select((m,i)=>S($"s{i}",$"S{i}",new[]{m},new[]{M2(0.25,0.25)})).ToArray();
+Run("collinear",new(){TrialId="t",Tracers=tracers,Observation=new[]{-20.0,0.0},MeasurementCovariance=new[,]{{0.36,0.0},{0.0,0.36}},Sources=srcs2,FractionationShift=new[]{0.0,0.0}});
+Run("outside",new(){TrialId="t",Tracers=tracers,Observation=new[]{-4.0,20.0},MeasurementCovariance=se,Sources=srcs1,FractionationShift=new[]{0.0,0.0}});
+// multi-region: A,B single; C mixture
+var A=S("A","A",new[]{new[]{0.0,0.0}},new[]{M2(0.16,0.16)});
+var B=S("B","B",new[]{new[]{10.0,0.0}},new[]{M2(0.16,0.16)});
+var C=S("C","C",new[]{new[]{5.0,6.0},new[]{5.0,15.0}},new[]{M2(0.16,0.16),M2(0.16,0.16)});
+Run("multiregion",new(){TrialId="t",Tracers=tracers,Observation=new[]{5.0,3.0},MeasurementCovariance=new[,]{{0.04,0.0},{0.0,0.04}},Sources=new[]{A,B,C},FractionationShift=new[]{0.0,0.0}});
+// infeasible prior
+Run("badprior",new(){TrialId="t",Tracers=tracers,Observation=new[]{-19.0,3.0},MeasurementCovariance=se,Sources=srcs1,FractionationShift=new[]{0.0,0.0},PriorKind="box",PriorBounds=new[]{(0.8,0.95),(0.8,0.95),(0.0,0.1)}});

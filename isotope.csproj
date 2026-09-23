@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>IsotopeApp</RootNamespace>
+    <DefaultItemExcludes>$(DefaultItemExcludes);tests/**;proto/**;cases/**;scratch/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cases\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

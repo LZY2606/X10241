@@ -1,0 +1,59 @@
+{
+  "caseId": "case-02-collinear",
+  "title": "近共线端元：可识别性不足，保留全部合法候选",
+  "narrativeStage": "boundary-combination",
+  "tracers": [
+    { "code": "d13C", "unit": { "code": "permil VPDB", "rawToken": "‰ VPDB" }, "reference": "VPDB" },
+    { "code": "d15N", "unit": { "code": "permil AIR", "rawToken": "‰ AIR" }, "reference": "AIR" }
+  ],
+  "sample": {
+    "sampleId": "smp-col-01",
+    "name": "共线情景样品",
+    "raw": { "d13C": "-20.0 ‰ VPDB", "d15N": "0.0 ‰ AIR" },
+    "values": [-20.0, 0.0],
+    "measurementCovariance": {
+      "tracers": ["d13C", "d15N"],
+      "matrix": [[0.36, 0.0], [0.0, 0.36]],
+      "rawToken": "0.6 ‰ sd each axis"
+    }
+  },
+  "sources": [
+    { "sourceId": "src-a", "name": "端元 A", "meansRaw": "-26.0;4.0",
+      "covarianceRaw": "0.5 ‰^2 isotropic",
+      "modes": [{ "mean": [-26.0, 4.0], "covariance": [[0.25, 0.0], [0.0, 0.25]], "weight": 1.0 }] },
+    { "sourceId": "src-b", "name": "端元 B（落在 A-C 连线上）", "meansRaw": "-20.0;0.0",
+      "covarianceRaw": "0.5 ‰^2 isotropic",
+      "modes": [{ "mean": [-20.0, 0.0], "covariance": [[0.25, 0.0], [0.0, 0.25]], "weight": 1.0 }] },
+    { "sourceId": "src-c", "name": "端元 C", "meansRaw": "-14.0;-4.0",
+      "covarianceRaw": "0.5 ‰^2 isotropic",
+      "modes": [{ "mean": [-14.0, -4.0], "covariance": [[0.25, 0.0], [0.0, 0.25]], "weight": 1.0 }] }
+  ],
+  "fractionation": {
+    "fractionationId": "frac-v1", "label": "无分馏", "basis": "identity",
+    "rawToken": "{}", "shifts": { "d13C": 0.0, "d15N": 0.0 }
+  },
+  "prior": null,
+  "confidenceLevel": 0.95,
+  "expect": {
+    "feasible": true,
+    "insideMeanHull": true,
+    "identifiabilityAdequate": false,
+    "conditionAbove": 30.0,
+    "regionCount": 1,
+    "feasibleFractionWide": true,
+    "diagnosticContains": ["identifiability_insufficient"],
+    "ruleChecks": [
+      "simplex_constrained_no_clip_renormalize",
+      "all_legal_candidates_retained"
+    ]
+  },
+  "provenance": {
+    "mustEmitEvents": ["identifiability_flagged", "analysis_completed"],
+    "machineReadableJudgment": {
+      "type": "identifiability_flagged",
+      "field": "identifiabilityAdequate",
+      "expected": false,
+      "reasonCode": "near_collinear_endmembers"
+    }
+  }
+}

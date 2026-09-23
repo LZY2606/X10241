@@ -1,0 +1,48 @@
+{
+  "caseId": "case-04-correlated",
+  "title": "相关测量误差：非对角项必须按协方差传播",
+  "narrativeStage": "boundary-combination",
+  "tracers": [
+    { "code": "d13C", "unit": { "code": "permil VPDB", "rawToken": "‰ VPDB" }, "reference": "VPDB" },
+    { "code": "d15N", "unit": { "code": "permil AIR", "rawToken": "‰ AIR" }, "reference": "AIR" }
+  ],
+  "sample": {
+    "sampleId": "smp-corr-01",
+    "name": "强相关误差样品（同一前处理批次）",
+    "raw": { "d13C": "-19.0 ‰ VPDB", "d15N": "3.0 ‰ AIR" },
+    "values": [-19.0, 3.0],
+    "measurementCovariance": {
+      "tracers": ["d13C", "d15N"],
+      "matrix": [[0.36, 0.16], [0.16, 0.25]],
+      "rawToken": "rho=+0.53 shared combustion bias; [[0.36,0.16],[0.16,0.25]]"
+    }
+  },
+  "sources": [
+    { "sourceId": "src-c3", "name": "C3 陆生植物", "meansRaw": "-26.0;4.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-26.0, 4.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-c4", "name": "C4 草本", "meansRaw": "-12.0;12.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-12.0, 12.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-marine", "name": "海洋浮游生物", "meansRaw": "-20.0;-8.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-20.0, -8.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] }
+  ],
+  "fractionation": {
+    "fractionationId": "frac-v1", "label": "无分馏", "basis": "identity",
+    "rawToken": "{}", "shifts": { "d13C": 0.0, "d15N": 0.0 }
+  },
+  "prior": null,
+  "confidenceLevel": 0.95,
+  "expect": {
+    "feasible": true,
+    "regionCount": 1,
+    "diagnosticContains": ["correlated_measurement_error"],
+    "ruleChecks": ["full_covariance_propagation"],
+    "covarianceOffDiagonalPreserved": 0.16
+  },
+  "provenance": {
+    "mustEmitEvents": ["analysis_completed"],
+    "mustRetainRaw": ["sample.measurementCovariance.rawToken"]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "caseId": "case-01-baseline",
+  "title": "基线：三端元两同位素，样品位于包络内部",
+  "narrativeStage": "initial-import",
+  "tracers": [
+    { "code": "d13C", "unit": { "code": "permil VPDB", "rawToken": "‰ VPDB" }, "reference": "VPDB" },
+    { "code": "d15N", "unit": { "code": "permil AIR", "rawToken": "‰ AIR" }, "reference": "AIR" }
+  ],
+  "sample": {
+    "sampleId": "smp-river-01",
+    "name": "河口悬浮颗粒样 SP-01",
+    "raw": { "d13C": "-19.0 ‰ VPDB", "d15N": "3.0 ‰ AIR" },
+    "values": [-19.0, 3.0],
+    "measurementCovariance": {
+      "tracers": ["d13C", "d15N"],
+      "matrix": [[0.36, 0.05], [0.05, 0.25]],
+      "rawToken": "[[0.36,0.05],[0.05,0.25]]  (‰^2, VPDB/AIR)"
+    }
+  },
+  "sources": [
+    { "sourceId": "src-c3", "name": "C3 陆生植物", "meansRaw": "-26.0 ‰ VPDB; 4.0 ‰ AIR",
+      "covarianceRaw": "diag-ish [[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-26.0, 4.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-c4", "name": "C4 草本", "meansRaw": "-12.0 ‰ VPDB; 12.0 ‰ AIR",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-12.0, 12.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-marine", "name": "海洋浮游生物", "meansRaw": "-20.0 ‰ VPDB; -8.0 ‰ AIR",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-20.0, -8.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] }
+  ],
+  "fractionation": {
+    "fractionationId": "frac-v1",
+    "label": "分馏 v1：无额外偏移",
+    "basis": "measured endmembers already corrected",
+    "rawToken": "{\"d13C\":0,\"d15N\":0}",
+    "shifts": { "d13C": 0.0, "d15N": 0.0 }
+  },
+  "prior": null,
+  "confidenceLevel": 0.95,
+  "expect": {
+    "feasible": true,
+    "insideMeanHull": true,
+    "identifiabilityAdequate": true,
+    "conditionBelow": 30.0,
+    "regionCount": 1,
+    "diagnosticContains": ["correlated_measurement_error"],
+    "centerApprox": [0.31, 0.36, 0.33],
+    "centerTolerance": 0.06
+  },
+  "provenance": {
+    "mustEmitEvents": ["import_committed", "analysis_completed"],
+    "mustRetainRaw": ["sample.raw", "sample.measurementCovariance.rawToken", "sources[*].meansRaw"]
+  }
+}

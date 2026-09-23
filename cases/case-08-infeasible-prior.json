@@ -1,0 +1,60 @@
+{
+  "caseId": "case-08-infeasible-prior",
+  "title": "不可行先验：先验框与单纯形无交集，显式拒绝",
+  "narrativeStage": "boundary-combination",
+  "tracers": [
+    { "code": "d13C", "unit": { "code": "permil VPDB", "rawToken": "‰ VPDB" }, "reference": "VPDB" },
+    { "code": "d15N", "unit": { "code": "permil AIR", "rawToken": "‰ AIR" }, "reference": "AIR" }
+  ],
+  "sample": {
+    "sampleId": "smp-river-01",
+    "name": "河口悬浮颗粒样 SP-01（套用矛盾先验）",
+    "raw": { "d13C": "-19.0 ‰ VPDB", "d15N": "3.0 ‰ AIR" },
+    "values": [-19.0, 3.0],
+    "measurementCovariance": {
+      "tracers": ["d13C", "d15N"],
+      "matrix": [[0.36, 0.05], [0.05, 0.25]],
+      "rawToken": "[[0.36,0.05],[0.05,0.25]]"
+    }
+  },
+  "sources": [
+    { "sourceId": "src-c3", "name": "C3 陆生植物", "meansRaw": "-26.0;4.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-26.0, 4.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-c4", "name": "C4 草本", "meansRaw": "-12.0;12.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-12.0, 12.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] },
+    { "sourceId": "src-marine", "name": "海洋浮游生物", "meansRaw": "-20.0;-8.0",
+      "covarianceRaw": "[[0.25,0.02],[0.02,0.16]]",
+      "modes": [{ "mean": [-20.0, -8.0], "covariance": [[0.25, 0.02], [0.02, 0.16]], "weight": 1.0 }] }
+  ],
+  "fractionation": {
+    "fractionationId": "frac-v1", "label": "无分馏", "basis": "identity",
+    "rawToken": "{}", "shifts": { "d13C": 0.0, "d15N": 0.0 }
+  },
+  "prior": {
+    "priorId": "prior-box-impossible",
+    "kind": "box",
+    "rawToken": "p_c3 in [0.80,0.95]; p_c4 in [0.80,0.95]; p_marine in [0.00,0.10]  (lower bounds sum to 1.6 > 1)",
+    "bounds": {
+      "src-c3": [0.80, 0.95],
+      "src-c4": [0.80, 0.95],
+      "src-marine": [0.00, 0.10]
+    }
+  },
+  "confidenceLevel": 0.95,
+  "expect": {
+    "priorInfeasible": true,
+    "diagnosticContains": ["infeasible_prior"],
+    "ruleChecks": ["prior_checked_not_forced", "simplex_constrained_no_clip_renormalize"]
+  },
+  "provenance": {
+    "mustEmitEvents": ["infeasible_prior_rejected", "analysis_completed"],
+    "machineReadableJudgment": {
+      "type": "infeasible_prior_rejected",
+      "field": "priorInfeasible",
+      "expected": true,
+      "reasonCode": "bounds_empty_intersection_with_simplex"
+    }
+  }
+}
