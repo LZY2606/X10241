@@ -1,0 +1,12 @@
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.AssemblyInfoInputs.cache
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.AssemblyInfo.cs
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.csproj.CoreCompileInputs.cache
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.sourcelink.json
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/bin/Debug/net10.0/IsotopeMixing.Core.deps.json
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/bin/Debug/net10.0/IsotopeMixing.Core.dll
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/bin/Debug/net10.0/IsotopeMixing.Core.pdb
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.dll
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/refint/IsotopeMixing.Core.dll
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/IsotopeMixing.Core.pdb
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsotopeMixing.Core/obj/Debug/net10.0/ref/IsotopeMixing.Core.dll
