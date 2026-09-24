@@ -1,0 +1,12 @@
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/bin/Debug/net10.0/IsoMix.Core.deps.json
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/bin/Debug/net10.0/IsoMix.Core.dll
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/bin/Debug/net10.0/IsoMix.Core.pdb
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.AssemblyInfoInputs.cache
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.AssemblyInfo.cs
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.csproj.CoreCompileInputs.cache
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.sourcelink.json
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.dll
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/refint/IsoMix.Core.dll
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/IsoMix.Core.pdb
+/Users/mac/pro/Pair-wiseGSB/pairwise-gsb-20260919-003312/workspace/1212/runs/B/work/src/IsoMix.Core/obj/Debug/net10.0/ref/IsoMix.Core.dll
