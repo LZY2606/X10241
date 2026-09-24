@@ -34,3 +34,9 @@ coverage/
 .vite/
 .turbo/
 *.tsbuildinfo
+
+# --- .NET 构建产物与本地数据库 ---
+bin/
+obj/
+data/
+*.user
