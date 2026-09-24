@@ -1,0 +1,493 @@
+{
+  "schema": "isotope-mix-case/1",
+  "id": "source-chamber",
+  "title": "源组成室：同位素端元、分馏假设与可行混合区间",
+  "domain": "stable-isotope-mixing",
+  "narrative": "生态地球化学小组对河口沉积物有机质做源解析：导入样品同位素值、多个端元分布与分馏因子，检查混合比例可行域而非单点答案。",
+  "batch": {
+    "batchId": "B-SRC-2026-09",
+    "label": "源组成室 2026 年 9 月批次（基线原始记录）",
+    "origin": "生态地球化学小组/采样季 2026-09（离线案例包）",
+    "samples": [
+      {
+        "id": "S-mix",
+        "code": "EC-101",
+        "material": "表层沉积物有机质",
+        "site": "河口中部",
+        "deltas": {
+          "d13C": "-24.6 permille VPDB",
+          "d15N": "5.9 permille AIR",
+          "d18O": "19.4 permille VSMOW"
+        },
+        "notes": [
+          "基线样品，三维齐全"
+        ]
+      },
+      {
+        "id": "S-out",
+        "code": "EC-204",
+        "material": "河口外侧悬浮物",
+        "site": "陆架方向",
+        "deltas": {
+          "d13C": "-33.0 permille VPDB",
+          "d15N": "17.0 permille AIR",
+          "d18O": "30.0 permille VSMOW"
+        },
+        "notes": [
+          "刻意落在所有端元包络之外的反例样品"
+        ]
+      },
+      {
+        "id": "S-miss",
+        "code": "EC-309",
+        "material": "柱状样 30cm",
+        "site": "河口北部",
+        "deltas": {
+          "d13C": "-25.2 permille VPDB",
+          "d15N": "5.4 permille AIR",
+          "d18O": ""
+        },
+        "notes": [
+          "d18O 未测；保留缺失维，不插补"
+        ]
+      }
+    ],
+    "endmemberSets": [
+      {
+        "id": "EM-v1",
+        "label": "现代水体三端元（河流/海洋/降水）v1",
+        "members": [
+          {
+            "code": "river",
+            "label": "河流输入",
+            "modeId": "default",
+            "means": {
+              "d13C": "-28 permille VPDB",
+              "d15N": "4 permille AIR",
+              "d18O": "10 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.9,
+              "d15N": 0.8,
+              "d18O": 1.2
+            }
+          },
+          {
+            "code": "marine",
+            "label": "海洋端元",
+            "modeId": "default",
+            "means": {
+              "d13C": "-18 permille VPDB",
+              "d15N": "10 permille AIR",
+              "d18O": "30 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.7,
+              "d15N": 0.7,
+              "d18O": 1.0
+            }
+          },
+          {
+            "code": "precip",
+            "label": "降水/大气沉降",
+            "modeId": "default",
+            "means": {
+              "d13C": "-34 permille VPDB",
+              "d15N": "-2 permille AIR",
+              "d18O": "-12 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 1.1,
+              "d15N": 1.0,
+              "d18O": 1.6
+            }
+          }
+        ]
+      },
+      {
+        "id": "EM-v2",
+        "label": "近共线三端元 v2（反例）",
+        "members": [
+          {
+            "code": "river",
+            "label": "河流输入",
+            "modeId": "default",
+            "means": {
+              "d13C": "-28 permille VPDB",
+              "d15N": "4 permille AIR",
+              "d18O": "10 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.9,
+              "d15N": 0.8,
+              "d18O": 1.2
+            }
+          },
+          {
+            "code": "marine",
+            "label": "海洋端元（位置偏移至近共线）",
+            "modeId": "default",
+            "means": {
+              "d13C": "-26.5 permille VPDB",
+              "d15N": "5.0 permille AIR",
+              "d18O": "12.3 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.8,
+              "d15N": 0.8,
+              "d18O": 1.0
+            }
+          },
+          {
+            "code": "precip",
+            "label": "降水/大气沉降",
+            "modeId": "default",
+            "means": {
+              "d13C": "-25 permille VPDB",
+              "d15N": "6 permille AIR",
+              "d18O": "14.5 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 1.0,
+              "d15N": 1.0,
+              "d18O": 1.5
+            }
+          }
+        ]
+      },
+      {
+        "id": "EM-v3",
+        "label": "多模式海洋端元 v3（多个可行区）",
+        "members": [
+          {
+            "code": "river",
+            "label": "河流输入",
+            "modeId": "modern",
+            "means": {
+              "d13C": "-28 permille VPDB",
+              "d15N": "4 permille AIR",
+              "d18O": "10 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.9,
+              "d15N": 0.8,
+              "d18O": 1.2
+            }
+          },
+          {
+            "code": "marine-modern",
+            "label": "现代海洋",
+            "modeId": "modern",
+            "means": {
+              "d13C": "-18 permille VPDB",
+              "d15N": "10 permille AIR",
+              "d18O": "30 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.7,
+              "d15N": 0.7,
+              "d18O": 1.0
+            }
+          },
+          {
+            "code": "precip",
+            "label": "降水/大气沉降",
+            "modeId": "modern",
+            "means": {
+              "d13C": "-34 permille VPDB",
+              "d15N": "-2 permille AIR",
+              "d18O": "-12 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 1.1,
+              "d15N": 1.0,
+              "d18O": 1.6
+            }
+          },
+          {
+            "code": "marine-B",
+            "label": "假想热液改造海洋（模式 B）",
+            "modeId": "modeB",
+            "means": {
+              "d13C": "-11 permille VPDB",
+              "d15N": "9.5 permille AIR",
+              "d18O": "-4 permille VSMOW"
+            },
+            "sd": {
+              "d13C": 0.8,
+              "d15N": 0.8,
+              "d18O": 1.1
+            }
+          }
+        ]
+      }
+    ],
+    "covariances": [
+      {
+        "id": "C-diag",
+        "sampleId": "S-mix",
+        "dimensions": [
+          "d13C",
+          "d15N",
+          "d18O"
+        ],
+        "matrix": [
+          [
+            0.36,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.49,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.64
+          ]
+        ],
+        "record": "实验室报告 R-11（独立误差）"
+      },
+      {
+        "id": "C-corr",
+        "sampleId": "S-mix",
+        "dimensions": [
+          "d13C",
+          "d15N",
+          "d18O"
+        ],
+        "matrix": [
+          [
+            0.36,
+            0.3,
+            0.18
+          ],
+          [
+            0.3,
+            0.49,
+            0.12
+          ],
+          [
+            0.18,
+            0.12,
+            0.64
+          ]
+        ],
+        "record": "实验室报告 R-11 复核：ρ(13,15)=0.71, ρ(13,18)=0.38, ρ(15,18)=0.21（相关误差）"
+      },
+      {
+        "id": "C-out",
+        "sampleId": "S-out",
+        "dimensions": [
+          "d13C",
+          "d15N",
+          "d18O"
+        ],
+        "matrix": [
+          [
+            0.64,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.64,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.81
+          ]
+        ],
+        "record": "实验室报告 R-12"
+      },
+      {
+        "id": "C-miss",
+        "sampleId": "S-miss",
+        "dimensions": [
+          "d13C",
+          "d15N"
+        ],
+        "matrix": [
+          [
+            0.36,
+            0.16
+          ],
+          [
+            0.16,
+            0.49
+          ]
+        ],
+        "record": "实验室报告 R-13（仅两维，且相关）"
+      }
+    ],
+    "fractionations": [
+      {
+        "id": "F0",
+        "label": "不分馏校正",
+        "shift": {
+          "d13C": 0.0,
+          "d15N": 0.0,
+          "d18O": 0.0
+        },
+        "basis": "直接比较测量值"
+      },
+      {
+        "id": "F1",
+        "label": "有机质-水体平衡分馏校正 v1",
+        "shift": {
+          "d13C": -1.0,
+          "d15N": 2.0,
+          "d18O": 4.0
+        },
+        "basis": "组内经验关系 δ样品 = δ源 + ε；本次取 ε(13C)=-1, ε(15N)=2, ε(18O)=4 permille"
+      }
+    ],
+    "priors": [
+      {
+        "id": "P-open",
+        "label": "开放混合（无额外限制）",
+        "bounds": {},
+        "basis": "仅单纯形约束"
+      },
+      {
+        "id": "P-sea",
+        "label": "海洋主导先验",
+        "bounds": {
+          "marine": [
+            0.6,
+            0.95
+          ],
+          "river": [
+            0.0,
+            0.4
+          ],
+          "precip": [
+            0.0,
+            0.2
+          ]
+        },
+        "basis": "场地知识：采样点以海水为主"
+      },
+      {
+        "id": "P-impossible",
+        "label": "不可行先验（反例）",
+        "bounds": {
+          "marine": [
+            0.9,
+            1.0
+          ],
+          "river": [
+            0.4,
+            1.0
+          ],
+          "precip": [
+            0.2,
+            1.0
+          ]
+        },
+        "basis": "下界之和超过 1，与和为一冲突"
+      }
+    ],
+    "unconvertible": [
+      {
+        "where": "S-mix.d18O",
+        "raw": "见纸质本 L-44（无单位无基准）",
+        "diagnostic": "该字段以原始备注形式保留，不用于派生层。"
+      }
+    ]
+  },
+  "replay": [
+    {
+      "step": "baseline",
+      "branch": "B0-base",
+      "purpose": "初始基线：开放混合、无分馏",
+      "sample": "S-mix",
+      "endmemberSet": "EM-v1",
+      "covariance": "C-diag",
+      "fractionation": "F0",
+      "prior": "P-open",
+      "expectVerdict": "identifiable"
+    },
+    {
+      "step": "near-collinear",
+      "branch": "B1-collinear",
+      "purpose": "反例：近共线端元",
+      "sample": "S-mix",
+      "endmemberSet": "EM-v2",
+      "covariance": "C-diag",
+      "fractionation": "F0",
+      "prior": "P-open",
+      "expectVerdict": "under_identified"
+    },
+    {
+      "step": "outside-envelope",
+      "branch": "B2-outside",
+      "purpose": "反例：样品超出包络",
+      "sample": "S-out",
+      "endmemberSet": "EM-v1",
+      "covariance": "C-out",
+      "fractionation": "F0",
+      "prior": "P-open",
+      "expectVerdict": "infeasible"
+    },
+    {
+      "step": "correlated-error",
+      "branch": "B3-corr",
+      "purpose": "反例：相关误差按协方差传播",
+      "sample": "S-mix",
+      "endmemberSet": "EM-v1",
+      "covariance": "C-corr",
+      "fractionation": "F0",
+      "prior": "P-open",
+      "expectVerdict": "identifiable"
+    },
+    {
+      "step": "missing-dimension",
+      "branch": "B4-missing",
+      "purpose": "反例：缺失同位素维",
+      "sample": "S-miss",
+      "endmemberSet": "EM-v1",
+      "covariance": "C-miss",
+      "fractionation": "F0",
+      "prior": "P-open",
+      "expectVerdict": "under_identified"
+    },
+    {
+      "step": "fractionation-switch",
+      "branch": "B5-frac",
+      "purpose": "并排：分馏版本切换 F0→F1",
+      "sample": "S-mix",
+      "endmemberSet": "EM-v1",
+      "covariance": "C-diag",
+      "fractionation": "F1",
+      "prior": "P-open",
+      "expectVerdict": "identifiable"
+    },
+    {
+      "step": "multiple-regions",
+      "branch": "B6-multi",
+      "purpose": "反例：多个可行区（多模式端元）",
+      "sample": "S-mix",
+      "endmemberSet": "EM-v3",
+      "covariance": "C-diag",
+      "fractionation": "F0",
+      "prior": "P-open",
+      "expectVerdict": "identifiable"
+    },
+    {
+      "step": "infeasible-prior",
+      "branch": "B7-prior",
+      "purpose": "反例：不可行先验",
+      "sample": "S-mix",
+      "endmemberSet": "EM-v1",
+      "covariance": "C-diag",
+      "fractionation": "F0",
+      "prior": "P-impossible",
+      "expectVerdict": "infeasible"
+    }
+  ]
+}
