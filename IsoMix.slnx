@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/IsoMix.Core/IsoMix.Core.csproj" />
+    <Project Path="src/IsoMix.Data/IsoMix.Data.csproj" />
+    <Project Path="src/IsoMix.Web/IsoMix.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/IsoMix.Tests/IsoMix.Tests.csproj" />
+  </Folder>
+</Solution>
