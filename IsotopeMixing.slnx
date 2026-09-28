@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="IsotopeMixing.Core/IsotopeMixing.Core.csproj" />
+  <Project Path="IsotopeMixing.Tests/IsotopeMixing.Tests.csproj" />
+  <Project Path="IsotopeMixing.Web/IsotopeMixing.Web.csproj" />
+</Solution>
